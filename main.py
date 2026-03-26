@@ -15,11 +15,14 @@ def query_huggingface(prompt):
         "parameters": {"max_new_tokens": 120}
     }
     response = requests.post(API_URL, headers=headers, json=payload)
-    result = response.json()
 
-    if isinstance(result, list):
-        return result[0]["generated_text"]
-    return str(result)
+    try:
+        result = response.json()
+        if isinstance(result, list):
+            return result[0]["generated_text"]
+        return str(result)
+    except:
+        return "AI error."
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     user_message = update.message.text
