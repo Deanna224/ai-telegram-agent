@@ -14,7 +14,6 @@ def query_huggingface(prompt):
         "inputs": prompt,
         "parameters": {"max_new_tokens": 120}
     }
-
     response = requests.post(API_URL, headers=headers, json=payload)
     result = response.json()
 
